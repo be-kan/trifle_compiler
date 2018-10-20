@@ -1,0 +1,6 @@
+a.out
+*.cmake
+*.cbp
+*.o
+Cmake*
+*.exf
