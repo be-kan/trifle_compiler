@@ -128,8 +128,8 @@ static int nextChar()
     if (LineIndex == -1) {
         Fin.getline(LineBuffer, MAX_LINE_LEN);
         CurLineNo += 1;
-        cout << setw(3) << CurLineNo;
-        cout << ": " << LineBuffer << endl;
+        // cout << setw(3) << CurLineNo;
+        // cout << ": " << LineBuffer << endl;
         LineIndex = 0;
         removeComment(LineBuffer);
     } else if (Fin.eof()) return EOF;
@@ -252,6 +252,9 @@ Token nextToken()
 
 Token checkAndgetToken(Token t, TokType k)
 {
-    if (t.type == k) return nextToken();
-    return t;
+    if (t.type == k) {
+        return nextToken();
+    } else {
+        return t;
+    }
 }

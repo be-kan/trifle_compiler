@@ -1,0 +1,16 @@
+function add(a, b)
+int r;
+{
+    r := a + b;
+    return r;
+};
+
+program addfunc
+int x, y;
+{
+    x := 62;
+    y := 12;
+
+    write add(x, y);
+    writeln;
+}

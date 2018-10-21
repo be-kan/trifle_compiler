@@ -77,7 +77,7 @@ int regFuncParam(string id)
     if (CurNameIndex++ < MAX_TABLE_ENTRY) NameTable[CurNameIndex].name = id;
     NameTable[CurNameIndex].val.type = parId;
     NameTable[CurNameIndex].val.param1 = Level;
-    NameTable[CurNameIndex].val.params++;
+    NameTable[CurFuncIndex].val.params++;
     return CurNameIndex;
 }
 
@@ -100,9 +100,9 @@ int regConst(string id, int v)
 
 void finParamDecl()
 {
-    int prs = NameTable[CurNameIndex].val.params;
+    int prs = NameTable[CurFuncIndex].val.params;
     if (prs == 0) return;
-    for (int i=1; i<=prs; i++) NameTable[CurNameIndex+i].val.param2 = i-1-prs;
+    for (int i=1; i<=prs; i++) NameTable[CurFuncIndex+i].val.param2 = i-1-prs;
 }
 
 void changeV(int indx, int newVal)
@@ -142,7 +142,7 @@ int getVal(int indx)
     return NameTable[indx].val.param1;
 }
 
-int getLastVaraddr()
+int getLastVarAddr()
 {
     return LasrVarAddr;
 }
@@ -212,7 +212,7 @@ void compileFuncDecl()
     finParamDecl();
     if (NextToken.type == Semicolon) NextToken = nextToken();
     compileBlock(fIndex);
-    NextToken = checkAndgetToken(NextToken, Rparen);
+    NextToken = checkAndgetToken(NextToken, Semicolon);
 }
 
 void compileProgDecl()
@@ -399,9 +399,10 @@ void statement()
             case LBrace:
                 NextToken = nextToken();
                 while (1) {
+                    statement();
                     if (NextToken.type == Semicolon) {
                         NextToken = nextToken();
-                        break;
+                        continue;
                     }
                     if (NextToken.type == RBrace) {
                         NextToken = nextToken();
@@ -478,7 +479,7 @@ void compileBlock(int indx)
     }
     backPatch(patchAddress);
     changeV(indx, getNextCodeAddrs());
-    genObjCode(incmnt, getLastVaraddr());
+    genObjCode(incmnt, getLastVarAddr());
     statement();
     genRetCode();
     finBlock();
