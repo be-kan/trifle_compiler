@@ -1,0 +1,13 @@
+function printTotal(a, b)
+int i;
+{
+    write a + b;
+    writeln;
+
+    return;
+};
+
+program callfunc
+{
+    call printTotal(1, 2);
+};

@@ -1,0 +1,10 @@
+function add(a, b)
+int i;
+{
+     return a + b;
+};
+
+program negadd
+{
+    write add ( -1, -4);
+};

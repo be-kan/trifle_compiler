@@ -165,6 +165,7 @@ Token nextToken()
                 if (id == KeyWdT[i].name) {
                     temp.type = KeyWdT[i].keyId;
                     CurToken = temp;
+                    // cout << "Token : " << keyname[temp.type] << endl;
                     return temp;
                 }
             }
@@ -182,6 +183,7 @@ Token nextToken()
                 if (id == KeyWdT[i].name) {
                     temp.type = KeyWdT[i].keyId;
                     CurToken = temp;
+                    // cout << "Token : " << keyname[temp.type] << endl;
                     return temp;
                 }
             }
@@ -247,14 +249,17 @@ Token nextToken()
             break;
     }
     CurToken = temp;
+    // cout << "Token : " << keyname[temp.type] << endl;
     return temp;
 }
 
 Token checkAndgetToken(Token t, TokType k)
 {
     if (t.type == k) {
+        // cout << "expected " << keyname[t.type] << " and check OK!!" << endl;
         return nextToken();
     } else {
+        // cout << "expected " << keyname[t.type] << " but got " << keyname[k] << endl;
         return t;
     }
 }

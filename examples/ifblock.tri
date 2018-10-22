@@ -1,0 +1,16 @@
+program ifblock
+int n;
+{
+    n := 45;
+
+    if n > 0 then
+    {
+        write 1;
+        writesp;
+        write 10;
+        writeln;
+    };
+
+
+    writeln;
+};

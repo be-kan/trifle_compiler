@@ -1,0 +1,13 @@
+program zero2nine
+int i;
+{
+    i := 0;
+
+    while i < 10 do
+    {
+        write i;
+        writesp;
+        i := i + 1;
+    };
+    writeln;
+};

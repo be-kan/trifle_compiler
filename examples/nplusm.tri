@@ -1,0 +1,7 @@
+program nplusm
+int n, m;
+{
+    n := 3;
+    m := 5;
+    write n + m * -1;
+};

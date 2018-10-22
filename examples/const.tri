@@ -1,0 +1,14 @@
+function printTotal(a, b)
+int i;
+{
+    write a + b;
+    writeln;
+
+    return;
+};
+
+program const
+const max = 5;
+{
+    call printTotal(max, 3);
+};

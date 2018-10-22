@@ -1,0 +1,13 @@
+function min(a, b)
+int i;
+{
+    if a < b then
+        return a;
+
+    return b;
+};
+
+program minval
+{
+    write min(7, 3);
+};

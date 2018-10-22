@@ -1,0 +1,10 @@
+program ifthen
+int n;
+{
+    n := 100;
+
+    if n > 0 then
+       write 123;
+
+    writeln;
+};

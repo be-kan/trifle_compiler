@@ -402,7 +402,7 @@ void statement()
                     statement();
                     if (NextToken.type == Semicolon) {
                         NextToken = nextToken();
-                        break;
+                        continue;
                     }
                     if (NextToken.type == RBrace) {
                         NextToken = nextToken();
