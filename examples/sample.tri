@@ -1,16 +1,15 @@
-function add(a, b)
-int r;
+program ifblock
+int n;
 {
-    r := a + b;
-    return r;
-};
+    n := 45;
 
-program addfunc
-int x, y;
-{
-    x := 62;
-    y := 12;
+    if n > 0 then
+    {
+        write 1;
+        writesp;
+        write 10;
+        writeln;
+    };
 
-    write add(x, y);
     writeln;
 }

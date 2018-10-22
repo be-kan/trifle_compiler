@@ -41,7 +41,7 @@ void backPatch(int indx)
 
 void listCode()
 {
-    cout << "generated code" << endl;
+    cout << "----- generated code -----" << endl;
     int n = (int)Codes.size();
     for (int i=0; i < n; i++) {
         cout << setw(3) << i;

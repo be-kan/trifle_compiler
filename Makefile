@@ -39,10 +39,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /usr/local/Cellar/cmake/3.12.1/bin/cmake
+CMAKE_COMMAND = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake
 
 # The command to remove a file.
-RM = /usr/local/Cellar/cmake/3.12.1/bin/cmake -E remove -f
+RM = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /Users/kanberyuuta/dev/trifle_compiler
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/local/Cellar/cmake/3.12.1/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -69,8 +69,8 @@ rebuild_cache/fast: rebuild_cache
 
 # Special rule for the target edit_cache
 edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/usr/local/Cellar/cmake/3.12.1/bin/ccmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -111,17 +111,30 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named a.out
+# Target rules for targets named tvm
 
 # Build rule for target.
-a.out: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 a.out
-.PHONY : a.out
+tvm: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 tvm
+.PHONY : tvm
 
 # fast build rule for target.
-a.out/fast:
-	$(MAKE) -f CMakeFiles/a.out.dir/build.make CMakeFiles/a.out.dir/build
-.PHONY : a.out/fast
+tvm/fast:
+	$(MAKE) -f CMakeFiles/tvm.dir/build.make CMakeFiles/tvm.dir/build
+.PHONY : tvm/fast
+
+#=============================================================================
+# Target rules for targets named trifle
+
+# Build rule for target.
+trifle: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 trifle
+.PHONY : trifle
+
+# fast build rule for target.
+trifle/fast:
+	$(MAKE) -f CMakeFiles/trifle.dir/build.make CMakeFiles/trifle.dir/build
+.PHONY : trifle/fast
 
 compile.o: compile.cpp.o
 
@@ -129,7 +142,7 @@ compile.o: compile.cpp.o
 
 # target to build an object file
 compile.cpp.o:
-	$(MAKE) -f CMakeFiles/a.out.dir/build.make CMakeFiles/a.out.dir/compile.cpp.o
+	$(MAKE) -f CMakeFiles/trifle.dir/build.make CMakeFiles/trifle.dir/compile.cpp.o
 .PHONY : compile.cpp.o
 
 compile.i: compile.cpp.i
@@ -138,7 +151,7 @@ compile.i: compile.cpp.i
 
 # target to preprocess a source file
 compile.cpp.i:
-	$(MAKE) -f CMakeFiles/a.out.dir/build.make CMakeFiles/a.out.dir/compile.cpp.i
+	$(MAKE) -f CMakeFiles/trifle.dir/build.make CMakeFiles/trifle.dir/compile.cpp.i
 .PHONY : compile.cpp.i
 
 compile.s: compile.cpp.s
@@ -147,7 +160,7 @@ compile.s: compile.cpp.s
 
 # target to generate assembly for a file
 compile.cpp.s:
-	$(MAKE) -f CMakeFiles/a.out.dir/build.make CMakeFiles/a.out.dir/compile.cpp.s
+	$(MAKE) -f CMakeFiles/trifle.dir/build.make CMakeFiles/trifle.dir/compile.cpp.s
 .PHONY : compile.cpp.s
 
 gencode.o: gencode.cpp.o
@@ -156,7 +169,7 @@ gencode.o: gencode.cpp.o
 
 # target to build an object file
 gencode.cpp.o:
-	$(MAKE) -f CMakeFiles/a.out.dir/build.make CMakeFiles/a.out.dir/gencode.cpp.o
+	$(MAKE) -f CMakeFiles/trifle.dir/build.make CMakeFiles/trifle.dir/gencode.cpp.o
 .PHONY : gencode.cpp.o
 
 gencode.i: gencode.cpp.i
@@ -165,7 +178,7 @@ gencode.i: gencode.cpp.i
 
 # target to preprocess a source file
 gencode.cpp.i:
-	$(MAKE) -f CMakeFiles/a.out.dir/build.make CMakeFiles/a.out.dir/gencode.cpp.i
+	$(MAKE) -f CMakeFiles/trifle.dir/build.make CMakeFiles/trifle.dir/gencode.cpp.i
 .PHONY : gencode.cpp.i
 
 gencode.s: gencode.cpp.s
@@ -174,7 +187,7 @@ gencode.s: gencode.cpp.s
 
 # target to generate assembly for a file
 gencode.cpp.s:
-	$(MAKE) -f CMakeFiles/a.out.dir/build.make CMakeFiles/a.out.dir/gencode.cpp.s
+	$(MAKE) -f CMakeFiles/trifle.dir/build.make CMakeFiles/trifle.dir/gencode.cpp.s
 .PHONY : gencode.cpp.s
 
 gettoken.o: gettoken.cpp.o
@@ -183,7 +196,7 @@ gettoken.o: gettoken.cpp.o
 
 # target to build an object file
 gettoken.cpp.o:
-	$(MAKE) -f CMakeFiles/a.out.dir/build.make CMakeFiles/a.out.dir/gettoken.cpp.o
+	$(MAKE) -f CMakeFiles/trifle.dir/build.make CMakeFiles/trifle.dir/gettoken.cpp.o
 .PHONY : gettoken.cpp.o
 
 gettoken.i: gettoken.cpp.i
@@ -192,7 +205,7 @@ gettoken.i: gettoken.cpp.i
 
 # target to preprocess a source file
 gettoken.cpp.i:
-	$(MAKE) -f CMakeFiles/a.out.dir/build.make CMakeFiles/a.out.dir/gettoken.cpp.i
+	$(MAKE) -f CMakeFiles/trifle.dir/build.make CMakeFiles/trifle.dir/gettoken.cpp.i
 .PHONY : gettoken.cpp.i
 
 gettoken.s: gettoken.cpp.s
@@ -201,7 +214,7 @@ gettoken.s: gettoken.cpp.s
 
 # target to generate assembly for a file
 gettoken.cpp.s:
-	$(MAKE) -f CMakeFiles/a.out.dir/build.make CMakeFiles/a.out.dir/gettoken.cpp.s
+	$(MAKE) -f CMakeFiles/trifle.dir/build.make CMakeFiles/trifle.dir/gettoken.cpp.s
 .PHONY : gettoken.cpp.s
 
 main.o: main.cpp.o
@@ -210,7 +223,7 @@ main.o: main.cpp.o
 
 # target to build an object file
 main.cpp.o:
-	$(MAKE) -f CMakeFiles/a.out.dir/build.make CMakeFiles/a.out.dir/main.cpp.o
+	$(MAKE) -f CMakeFiles/trifle.dir/build.make CMakeFiles/trifle.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -219,7 +232,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	$(MAKE) -f CMakeFiles/a.out.dir/build.make CMakeFiles/a.out.dir/main.cpp.i
+	$(MAKE) -f CMakeFiles/trifle.dir/build.make CMakeFiles/trifle.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -228,7 +241,7 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	$(MAKE) -f CMakeFiles/a.out.dir/build.make CMakeFiles/a.out.dir/main.cpp.s
+	$(MAKE) -f CMakeFiles/trifle.dir/build.make CMakeFiles/trifle.dir/main.cpp.s
 .PHONY : main.cpp.s
 
 util.o: util.cpp.o
@@ -237,7 +250,8 @@ util.o: util.cpp.o
 
 # target to build an object file
 util.cpp.o:
-	$(MAKE) -f CMakeFiles/a.out.dir/build.make CMakeFiles/a.out.dir/util.cpp.o
+	$(MAKE) -f CMakeFiles/tvm.dir/build.make CMakeFiles/tvm.dir/util.cpp.o
+	$(MAKE) -f CMakeFiles/trifle.dir/build.make CMakeFiles/trifle.dir/util.cpp.o
 .PHONY : util.cpp.o
 
 util.i: util.cpp.i
@@ -246,7 +260,8 @@ util.i: util.cpp.i
 
 # target to preprocess a source file
 util.cpp.i:
-	$(MAKE) -f CMakeFiles/a.out.dir/build.make CMakeFiles/a.out.dir/util.cpp.i
+	$(MAKE) -f CMakeFiles/tvm.dir/build.make CMakeFiles/tvm.dir/util.cpp.i
+	$(MAKE) -f CMakeFiles/trifle.dir/build.make CMakeFiles/trifle.dir/util.cpp.i
 .PHONY : util.cpp.i
 
 util.s: util.cpp.s
@@ -255,8 +270,36 @@ util.s: util.cpp.s
 
 # target to generate assembly for a file
 util.cpp.s:
-	$(MAKE) -f CMakeFiles/a.out.dir/build.make CMakeFiles/a.out.dir/util.cpp.s
+	$(MAKE) -f CMakeFiles/tvm.dir/build.make CMakeFiles/tvm.dir/util.cpp.s
+	$(MAKE) -f CMakeFiles/trifle.dir/build.make CMakeFiles/trifle.dir/util.cpp.s
 .PHONY : util.cpp.s
+
+vmmain.o: vmmain.cpp.o
+
+.PHONY : vmmain.o
+
+# target to build an object file
+vmmain.cpp.o:
+	$(MAKE) -f CMakeFiles/tvm.dir/build.make CMakeFiles/tvm.dir/vmmain.cpp.o
+.PHONY : vmmain.cpp.o
+
+vmmain.i: vmmain.cpp.i
+
+.PHONY : vmmain.i
+
+# target to preprocess a source file
+vmmain.cpp.i:
+	$(MAKE) -f CMakeFiles/tvm.dir/build.make CMakeFiles/tvm.dir/vmmain.cpp.i
+.PHONY : vmmain.cpp.i
+
+vmmain.s: vmmain.cpp.s
+
+.PHONY : vmmain.s
+
+# target to generate assembly for a file
+vmmain.cpp.s:
+	$(MAKE) -f CMakeFiles/tvm.dir/build.make CMakeFiles/tvm.dir/vmmain.cpp.s
+.PHONY : vmmain.cpp.s
 
 # Help Target
 help:
@@ -266,7 +309,8 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... a.out"
+	@echo "... tvm"
+	@echo "... trifle"
 	@echo "... compile.o"
 	@echo "... compile.i"
 	@echo "... compile.s"
@@ -282,6 +326,9 @@ help:
 	@echo "... util.o"
 	@echo "... util.i"
 	@echo "... util.s"
+	@echo "... vmmain.o"
+	@echo "... vmmain.i"
+	@echo "... vmmain.s"
 .PHONY : help
 
 

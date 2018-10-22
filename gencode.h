@@ -10,7 +10,7 @@ typedef enum codes {
     neg, add, sub, mul, divide,
     equals, ls, gr, neq, lseq, greq,
     wrt, wrtln, wrtsp,
-    nop, end, dummy
+    nop, e_nd, dummy
 } OpCode;
 
 class Instruction {

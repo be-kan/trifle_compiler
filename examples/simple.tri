@@ -1,4 +1,0 @@
-program simple
-{
-    write 10;
-}
