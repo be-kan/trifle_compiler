@@ -30,9 +30,9 @@ public:
     void storemem (int addr, int getVal) { vmemory[addr] = getVal; }
     int loadmem (int addr) { return vmemory[addr]; }
     void push (int getVal) { vmemory[stacktop++] = getVal; }
-    int pop1() { return vmemory[--stacktop]; }
+    int pop() { return vmemory[--stacktop]; }
     int peek() { return vmemory[stacktop]; }
-    int peek1() { return vmemory[stacktop-1]; }
+    int deep_peek() { return vmemory[stacktop-1]; }
     int getStackTop() { return stacktop; }
     int setStackTop(int addr) {
         stacktop = addr;
@@ -61,7 +61,6 @@ int main (int argc, char *argv[])
 void openFile(string fileName)
 {
     fin.open(fileName.c_str(), ios::binary | ios::in);
-    int lines = 0;
 }
 
 void closeFile()
@@ -120,7 +119,7 @@ Instruction getNextCode()
 
 void VirtualMachine::execute()
 {
-    int lev, temp;
+    int temp;
     Instruction instrct;
 
     storemem(0, 0);
@@ -138,82 +137,77 @@ void VirtualMachine::execute()
                 push(loadmem( getDisplay(instrct.param1) + instrct.param2) );
                 break;
             case store:
-                storemem( getDisplay(instrct.param1) + instrct.param2, pop1() );
+                storemem( getDisplay(instrct.param1) + instrct.param2, pop() );
                 break;
             case call:
-                lev = instrct.param1 +1;
-                storemem(getStackTop(), display[lev]);
+                storemem(getStackTop(), display[instrct.param1+1]);
                 storemem(getStackTop()+1, getPc());
-                setDisplay( lev, getStackTop());
-                setPc( instrct.param2) ;
+                setDisplay(instrct.param1+1, getStackTop());
+                setPc(instrct.param2) ;
                 break;
             case ret:
-                temp = pop1();
-                setStackTop( getDisplay(instrct.param1) );
-                if (instrct.param1 == 0) {
-                    setPc( 0 );
-                    break;
-                }
+                temp = pop();
+                setStackTop(getDisplay(instrct.param1));
+                if (instrct.param1 == 0) { setPc(0); break; }
                 setDisplay(instrct.param1, peek());
-                setPc( loadmem( getStackTop()+1 ));
-                setStackTop( getStackTop() - instrct.param2);
-                push( temp );
+                setPc(loadmem(getStackTop()+1));
+                setStackTop(getStackTop() - instrct.param2);
+                push(temp);
                 break;
             case incmnt:
-                setStackTop( getStackTop() + instrct.param1);
+                setStackTop(getStackTop() + instrct.param1);
                 break;
             case jmp:
-                setPc( instrct.param1);
+                setPc(instrct.param1);
                 break;
             case jpc:
-                if (pop1() == 0)
-                    setPc( instrct.param1 );
+                if (pop() == 0) setPc(instrct.param1);
                 break;
             case neg:
-                storemem(getStackTop()-1, -1 * loadmem(peek()-1));
+                storemem( getStackTop()-1, -1 * loadmem(peek()-1) );
                 break;
             case add:
-                pop1();
-                storemem( getStackTop()-1, peek1() + peek());
+                pop();
+                storemem( getStackTop()-1, deep_peek() + peek() );
                 break;
             case sub:
-                pop1();
-                storemem( getStackTop()-1, peek1() - peek());
+                pop();
+                storemem( getStackTop()-1, deep_peek() - peek() );
                 break;
             case mul:
-                pop1();
-                storemem( getStackTop()-1, peek1() * peek() );
+                pop();
+                storemem( getStackTop()-1, deep_peek() * peek() );
                 break;
             case divide:
-                pop1();
-                storemem( getStackTop()-1, peek1() / peek() );
+                pop();
+                storemem( getStackTop()-1, deep_peek() / peek() );
                 break;
             case equals:
-                pop1();
-                storemem( getStackTop()-1, (peek1() == peek()) );
+                pop();
+                storemem( getStackTop()-1, (deep_peek() == peek()) );
                 break;
             case ls:
-                pop1();
-                storemem( getStackTop()-1, (peek1() < peek()) );
+                pop();
+                storemem( getStackTop()-1, (deep_peek() < peek()) );
                 break;
             case gr:
-                pop1();
-                storemem( getStackTop()-1, (peek1() > peek()) );
+                pop();
+                storemem( getStackTop()-1, (deep_peek() > peek()) );
                 break;
             case neq:
-                pop1();
-                storemem( getStackTop()-1, (peek1() != peek()) );
+                pop();
+                storemem( getStackTop()-1, (deep_peek() != peek()) );
                 break;
             case lseq:
-                pop1();
-                storemem( getStackTop()-1, (peek1() <= peek()) );
+                pop();
+                storemem( getStackTop()-1, (deep_peek() <= peek()) );
                 break;
             case greq:
-                pop1();
-                storemem( getStackTop()-1, (peek1() >= peek()) );
+                pop();
+                storemem( getStackTop()-1, (deep_peek() >= peek()) );
                 break;
             case wrt:
-                cout << pop1();
+                cout << pop();
                 break;
             case wrtln:
                 cout << endl;

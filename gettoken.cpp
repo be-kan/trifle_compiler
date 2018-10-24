@@ -56,7 +56,7 @@ string keyname[] {
         "EndOfFile"
 };
 
-ifstream Fin;
+ifstream fin;
 
 static TokType getCharType(char chr)
 {
@@ -94,13 +94,13 @@ void init()
 
 void openSource(string fileName)
 {
-    Fin.open(fileName.c_str(), ios::in); // ios::in means 'read'
+    fin.open(fileName.c_str(), ios::in); // ios::in means 'read'
     CurLineNo = 0;
 }
 
 void closeSource()
 {
-    Fin.close();
+    fin.close();
 }
 
 static char *removeComment(char *s)
@@ -126,13 +126,13 @@ static int nextChar()
 {
     int ch;
     if (LineIndex == -1) {
-        Fin.getline(LineBuffer, MAX_LINE_LEN);
+        fin.getline(LineBuffer, MAX_LINE_LEN);
         CurLineNo += 1;
         // cout << setw(3) << CurLineNo;
         // cout << ": " << LineBuffer << endl;
         LineIndex = 0;
         removeComment(LineBuffer);
-    } else if (Fin.eof()) return EOF;
+    } else if (fin.eof()) return EOF;
 
     ch = (int)LineBuffer[LineIndex++];
     if (ch == 0) LineIndex = -1;
@@ -147,7 +147,7 @@ Token nextToken()
     int i = 0;
     int num;
     Token temp;
-    string id;
+    string name;
 
     while (1) {
         if (Chr==' ' || Chr==0x9 || Chr==0xa || Chr==0xd || Chr==0) ;
@@ -159,28 +159,21 @@ Token nextToken()
     switch (cc) {
         case LBrace:
         case RBrace:
-            id.append(1, Chr);
+            name.append(1, Chr);
             Chr = nextChar();
             for (i=0; i<end_of_KeyWd; i++) {
-                if (id == KeyWdT[i].name) {
-                    temp.type = KeyWdT[i].keyId;
-                    CurToken = temp;
-                    // cout << "Token : " << keyname[temp.type] << endl;
-                    return temp;
-                }
+                if (name == KeyWdT[i].name) { temp.type = KeyWdT[i].keyId; }
             }
             break;
         case Letter:
             do {
-                if (i < MAXNAME) id.append(1, Chr);
+                if (i < MAXNAME) name.append(1, Chr);
                 i++;
                 Chr = nextChar();
             } while (getCharType(Chr)==Letter || getCharType(Chr)==Digit);
 
-            if (i > MAXNAME) i = MAXNAME - 1;
-
             for (i=0; i<end_of_KeyWd; i++) {
-                if (id == KeyWdT[i].name) {
+                if (name == KeyWdT[i].name) {
                     temp.type = KeyWdT[i].keyId;
                     CurToken = temp;
                     // cout << "Token : " << keyname[temp.type] << endl;
@@ -189,7 +182,7 @@ Token nextToken()
             }
 
             temp.type = Id;
-            temp.name = id;
+            temp.name = name;
             break;
         case Digit:
             num = 0;
